@@ -71,6 +71,18 @@ Toggle back to English any time: `Edit → Plugins → 中文界面 开/关`.
 Not translatable from a plugin: text the IDA kernel writes itself (Output-window messages, some status-bar text)
 and, of course, data (disassembly, hex view).
 
+## Community (Chinese-speaking, QQ)
+
+Bug reports, dictionary contributions, or general IDA/reverse-engineering chat — these QQ groups are Chinese-speaking:
+
+| Group | Number |
+|---|---|
+| ai交流1群 | 1057540028 |
+| ai交流2群 | 1077074552 |
+| Cool coffeeAI交流 | 618179023 |
+
+QR codes: see the [Chinese README](README.md#交流群).
+
 ## Contributing
 
 Adding words is the most useful contribution — see [CONTRIBUTING.md](CONTRIBUTING.md).

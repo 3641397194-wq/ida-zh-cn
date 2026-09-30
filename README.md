@@ -12,7 +12,7 @@
 
 **运行时汉化插件 · 不改 IDA 一个字节 · 一键开关 · 脚本与其他插件零破坏**
 
-[安装](#安装) · [效果](#效果) · [原理](#为什么和别的汉化不一样) · [兼容性](#兼容性与测试) · [常见问题](#常见问题) · [English](README.en.md)
+[安装](#安装) · [效果](#效果) · [原理](#为什么和别的汉化不一样) · [兼容性](#兼容性与测试) · [常见问题](#常见问题) · [交流群](#交流群) · [English](README.en.md)
 
 </div>
 
@@ -223,6 +223,35 @@ flowchart LR
 
 见上面的[已知限制](#已知限制)。其中「词典没收录」的部分可以自己补：编辑 `zh_cn_user.json`，或把 `ida_zh_cn_missing.txt` 发给我们。
 </details>
+
+<br>
+
+## 交流群
+
+装完有问题、想补词条、或者单纯想聊 IDA / 逆向，欢迎进 QQ 群，扫码或搜群号都行：
+
+<table>
+<tr>
+<td align="center" width="33%">
+
+<img src="assets/qq/qq-group-1-1057540028.jpg" width="180"><br>
+<b>ai交流1群</b><br>群号：1057540028
+
+</td>
+<td align="center" width="33%">
+
+<img src="assets/qq/qq-group-2-1077074552.jpg" width="180"><br>
+<b>ai交流2群</b><br>群号：1077074552
+
+</td>
+<td align="center" width="33%">
+
+<img src="assets/qq/qq-group-3-618179023.jpg" width="180"><br>
+<b>Cool coffeeAI交流</b><br>群号：618179023
+
+</td>
+</tr>
+</table>
 
 <br>
 
