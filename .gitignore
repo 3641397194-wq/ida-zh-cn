@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+
+# files the plugin creates next to itself at runtime (in the IDA user dir, not here, but just in case)
+ida_zh_cn.conf.json
+ida_zh_cn_missing.txt
+zh_cn_user.json
+
+# editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

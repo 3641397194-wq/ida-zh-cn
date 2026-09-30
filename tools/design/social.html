@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>ida-zh-cn social preview</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  html, body { width: 1280px; height: 640px; }
+  .stage { width: 1280px; height: 640px; }
+  .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .mark { width: 132px; height: 132px; filter: drop-shadow(0 12px 34px rgba(33,224,208,.4)); margin-bottom: 26px; }
+  h1 { font-size: 118px; line-height: 1.05; font-weight: 800; letter-spacing: -2px; }
+  .sub { margin-top: 20px; font-size: 32px; color: var(--ink-dim); }
+  .sub b { color: var(--ink); font-weight: 600; }
+  .strip { margin-top: 42px; display: flex; align-items: center; gap: 22px; padding: 16px 28px; border-radius: 18px; border: 1px solid var(--line); background: rgba(12,18,38,.92); }
+  .strip .en { font: 500 19px var(--mono); color: #7d8db6; letter-spacing: .5px; }
+  .strip .ar { color: var(--cyan); font: 700 22px var(--mono); }
+  .strip .zh { font-size: 28px; font-weight: 700; letter-spacing: 3px; }
+  .veil { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 62% at 50% 50%, rgba(5,8,16,.92), rgba(5,8,16,.55) 60%, transparent 100%); }
+  .url { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; font: 500 18px var(--mono); color: var(--ink-faint); letter-spacing: 1.5px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="hexwall" data-rows="30" data-cols="3" style="opacity:.10"></div>
+  <div class="veil"></div>
+  <div class="grain"></div>
+  <div class="center">
+    <svg class="mark" viewBox="0 0 120 120" aria-hidden="true">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8ea2ff"/><stop offset="1" stop-color="#21e0d0"/></linearGradient>
+        <linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141c38"/><stop offset="1" stop-color="#0a1024"/></linearGradient>
+      </defs>
+      <polygon points="60,6 108,33 108,87 60,114 12,87 12,33" fill="url(#f)" stroke="url(#g)" stroke-width="4" stroke-linejoin="round"/>
+      <polygon points="60,20 96,40 96,80 60,100 24,80 24,40" fill="none" stroke="rgba(142,162,255,.28)" stroke-width="1.5"/>
+      <text x="60" y="78" text-anchor="middle" font-size="58" font-weight="800" fill="url(#g)" font-family="'Microsoft YaHei UI','Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif">汉</text>
+    </svg>
+    <h1><span class="gradient-text">IDA 汉化版</span></h1>
+    <p class="sub">运行时汉化插件 · <b>不改 IDA 一个字节</b> · 一键开关</p>
+    <div class="strip"><span class="en">File Edit Jump Search View</span><span class="ar">→</span><span class="zh">文件 编辑 跳转 搜索 视图</span></div>
+  </div>
+  <div class="url">github.com/3641397194-wq/ida-zh-cn</div>
+</div>
+<script src="hexwall.js"></script>
+</body>
+</html>

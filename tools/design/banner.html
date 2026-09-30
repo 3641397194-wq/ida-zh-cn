@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>ida-zh-cn banner</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  html, body { width: 1600px; height: 520px; }
+  .stage { width: 1600px; height: 520px; }
+
+  .left { position: absolute; left: 88px; top: 74px; width: 780px; }
+  .brand { display: flex; align-items: center; gap: 26px; margin-top: 26px; }
+  .mark { width: 112px; height: 112px; flex: none; filter: drop-shadow(0 10px 30px rgba(33,224,208,.35)); }
+  h1 { font-size: 112px; line-height: 1.05; font-weight: 800; letter-spacing: -2px; }
+  h1 small { font-size: 112px; font-weight: 300; letter-spacing: -2px; opacity: .92; }
+  .sub { margin-top: 26px; font-size: 30px; line-height: 1.5; color: var(--ink-dim); }
+  .sub b { color: var(--ink); font-weight: 600; }
+  .chips { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .card { position: absolute; left: 930px; top: 92px; width: 590px; padding: 26px 30px 28px;
+          background: linear-gradient(180deg, rgba(19,27,54,.93), rgba(9,14,30,.95)); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+  .dots { display: flex; gap: 8px; margin-bottom: 22px; }
+  .dots span { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,.18); }
+  .cap { font: 600 13px var(--mono); letter-spacing: 2.4px; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 10px; }
+  .row-en { font: 500 18px var(--mono); color: #7d8db6; display: flex; justify-content: space-between; padding-bottom: 6px; }
+  .row-en span { text-decoration: line-through; text-decoration-color: rgba(255,120,100,.45); }
+  .arrow { display: flex; align-items: center; gap: 12px; margin: 14px 0 16px; color: var(--cyan); font: 600 14px var(--mono); letter-spacing: 2px; }
+  .arrow::before, .arrow::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(33,224,208,.55), transparent); }
+  .row-zh { font-size: 28px; font-weight: 700; display: flex; justify-content: space-between; color: #fff; text-shadow: 0 0 24px rgba(110,134,255,.55); }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 26px; }
+  .stat { padding: 14px 14px 12px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid var(--line); }
+  .stat b { display: block; font: 700 30px var(--mono); color: #fff; letter-spacing: -.5px; }
+  .stat span { display: block; margin-top: 4px; font-size: 15px; color: var(--ink-dim); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="hexwall" data-rows="26" data-cols="3"></div>
+  <div class="grain"></div>
+
+  <div class="left">
+    <div class="eyebrow">IDA Pro 9.x &nbsp;·&nbsp; 简体中文 &nbsp;·&nbsp; zero-patch</div>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8ea2ff"/><stop offset="1" stop-color="#21e0d0"/></linearGradient>
+          <linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141c38"/><stop offset="1" stop-color="#0a1024"/></linearGradient>
+        </defs>
+        <polygon points="60,6 108,33 108,87 60,114 12,87 12,33" fill="url(#f)" stroke="url(#g)" stroke-width="4" stroke-linejoin="round"/>
+        <polygon points="60,20 96,40 96,80 60,100 24,80 24,40" fill="none" stroke="rgba(142,162,255,.28)" stroke-width="1.5"/>
+        <text x="60" y="78" text-anchor="middle" font-size="58" font-weight="800" fill="url(#g)" font-family="'Microsoft YaHei UI','Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif">汉</text>
+      </svg>
+      <h1><span class="gradient-text">IDA 汉化版</span></h1>
+    </div>
+    <p class="sub">运行时汉化插件 &nbsp;<b>不改 IDA 一个字节</b>，一键开关。<br>菜单、表头、对话框全覆盖，脚本与其他插件<b>零破坏</b>。</p>
+    <div class="chips">
+      <span class="pill"><i></i>Alt+F7 即时生效</span>
+      <span class="pill warm"><i></i>find_widget 不受影响</span>
+      <span class="pill indigo"><i></i>MIT 开源</span>
+    </div>
+  </div>
+
+  <div class="card glass">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <div class="cap">before</div>
+    <div class="row-en"><span>File</span><span>Edit</span><span>Jump</span><span>Search</span><span>View</span><span>Debugger</span><span>Options</span></div>
+    <div class="arrow">ida_zh_cn</div>
+    <div class="cap" style="color:var(--cyan)">after</div>
+    <div class="row-zh"><span>文件</span><span>编辑</span><span>跳转</span><span>搜索</span><span>视图</span><span>调试器</span><span>选项</span></div>
+    <div class="stats">
+      <div class="stat"><b>1,860</b><span>词条</span></div>
+      <div class="stat"><b>0 B</b><span>IDA 文件改动</span></div>
+      <div class="stat"><b>8 / 8</b><span>开关压力测试</span></div>
+    </div>
+  </div>
+</div>
+<script src="hexwall.js"></script>
+</body>
+</html>

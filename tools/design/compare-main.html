@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>ida-zh-cn compare: main window</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  html, body { width: 1600px; height: 690px; }
+  .stage { width: 1600px; height: 690px; padding: 46px 60px; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; }
+  h2 { font-size: 40px; font-weight: 800; letter-spacing: -.5px; }
+  .head p { font-size: 20px; color: var(--ink-dim); }
+  .col { margin-bottom: 22px; }
+  .lab { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+  .lab span.note { font-size: 18px; color: var(--ink-dim); }
+  .shot { width: 720px; }
+  .pair { display: grid; grid-template-columns: 720px 720px; gap: 40px; }
+  .shot img { width: 720px; height: auto; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="head">
+    <h2><span class="gradient-text">同一个窗口，同一份数据库</span></h2>
+    <p>菜单栏 · 工具栏 · 导航带图例 · 停靠窗口标题 · 列表表头 · 标签页</p>
+  </div>
+  <div class="pair">
+    <div class="col">
+      <div class="lab"><span class="tag before">Before · English</span><span class="note">IDA 9.1 原版</span></div>
+      <div class="shot"><img src="shots/off_main.png" alt="before"></div>
+    </div>
+    <div class="col">
+      <div class="lab"><span class="tag after">After · 简体中文</span><span class="note">启用 ida_zh_cn</span></div>
+      <div class="shot"><img src="shots/on_main.png" alt="after"></div>
+    </div>
+  </div>
+  <div class="pair" style="margin-top:6px">
+    <div class="glass" style="padding:20px 24px; font-size:19px; line-height:1.7; color:var(--ink-dim)">
+      <b style="color:#fff">窗口标识保持英文。</b>标题栏、标签页上的中文只是"画"上去的，<br>
+      <code style="font-family:var(--mono);color:var(--amber)">find_widget("Output window")</code> 之类的脚本照常工作。
+    </div>
+    <div class="glass" style="padding:20px 24px; font-size:19px; line-height:1.7; color:var(--ink-dim)">
+      <b style="color:#fff">一键还原。</b>Edit → Plugins → 中文界面 开/关，<br>
+      关闭后所有文字、样式立即回到英文，不留残余。
+    </div>
+  </div>
+</div>
+</body>
+</html>

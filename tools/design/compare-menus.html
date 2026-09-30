@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>ida-zh-cn compare: menus</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  html, body { width: 1600px; height: 640px; }
+  .stage { width: 1600px; height: 640px; padding: 50px 60px; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 26px; }
+  h2 { font-size: 40px; font-weight: 800; letter-spacing: -.5px; }
+  .head p { font-size: 20px; color: var(--ink-dim); }
+  .row { display: grid; grid-template-columns: 1fr 74px 1fr 1fr 74px 1fr; align-items: center; gap: 0; justify-items: center; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .shot { width: max-content; }
+  .shot img { height: 400px; width: auto; }
+  .arrow { color: var(--cyan); font: 700 40px var(--mono); }
+  .div { width: 1px; height: 380px; background: var(--line); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="head">
+    <h2><span class="gradient-text">菜单：整条翻译，快捷键原样保留</span></h2>
+    <p>Jump 菜单 · Options 菜单</p>
+  </div>
+  <div class="row">
+    <div class="cell"><div class="tag before">Before</div><div class="shot"><img src="shots/off_menu_jump.png" alt=""></div></div>
+    <div class="arrow">→</div>
+    <div class="cell"><div class="tag after">After</div><div class="shot"><img src="shots/on_menu_jump.png" alt=""></div></div>
+    <div class="cell"><div class="tag before">Before</div><div class="shot"><img src="shots/off_menu_options.png" alt=""></div></div>
+    <div class="arrow">→</div>
+    <div class="cell"><div class="tag after">After</div><div class="shot"><img src="shots/on_menu_options.png" alt=""></div></div>
+  </div>
+</div>
+</body>
+</html>

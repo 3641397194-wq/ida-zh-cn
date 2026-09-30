@@ -1,0 +1,31 @@
+name: 报告问题
+description: 崩溃、没有生效、脚本 / 插件被影响
+labels: [bug]
+body:
+  - type: input
+    id: ida
+    attributes:
+      label: IDA 版本
+      placeholder: "IDA Professional 9.1.250226"
+    validations: { required: true }
+  - type: input
+    id: env
+    attributes:
+      label: 操作系统 / Python 版本
+      placeholder: "Windows 11 · Python 3.12.10（IDA Output 窗口启动时会打印）"
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes:
+      label: 发生了什么，期望是什么
+    validations: { required: true }
+  - type: textarea
+    id: log
+    attributes:
+      label: Output 窗口里 [ida_zh_cn] 开头的行
+      render: text
+  - type: textarea
+    id: bisect
+    attributes:
+      label: （崩溃时）二分结果
+      description: 把 plugin/ida_zh_cn.py 里 FLAGS 的 style / text 分别改为 False 再试，告诉我们哪一个会崩。

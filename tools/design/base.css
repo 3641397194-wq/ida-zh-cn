@@ -1,0 +1,79 @@
+/* ida-zh-cn design tokens -- shared by every page in tools/design */
+:root {
+  --bg-0: #050810;
+  --bg-1: #0a1020;
+  --ink: #eaf0ff;
+  --ink-dim: #93a3cc;
+  --ink-faint: #5d6c92;
+  --line: rgba(160, 180, 255, .16);
+  --glass: rgba(255, 255, 255, .045);
+  --indigo: #6e86ff;
+  --cyan: #21e0d0;
+  --amber: #ffc46b;
+  --sans: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+  --mono: "Cascadia Mono", "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg-0); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow: hidden; }
+
+.stage {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(900px 520px at 10% -5%, rgba(110, 134, 255, .34), transparent 62%),
+    radial-gradient(820px 520px at 100% 108%, rgba(33, 224, 208, .26), transparent 62%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-0));
+}
+
+/* faint hex-dump wall; filled by hexwall.js. contains the UTF-8 bytes of "汉化" in amber */
+.hexwall {
+  position: absolute; inset: 0; white-space: pre; overflow: hidden;
+  font: 13px/21px var(--mono); letter-spacing: .4px; color: #86a0e6; opacity: .13;
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,.55) 45%, #000 75%);
+          mask-image: linear-gradient(90deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,.55) 45%, #000 75%);
+}
+.hexwall b { color: var(--amber); font-weight: 400; }
+
+.grain {
+  position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 100% 4px;
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #ffffff 0%, #cfe0ff 45%, #8ff3ea 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 9px 18px; border-radius: 999px;
+  font-size: 19px; color: #cdd8f5;
+  border: 1px solid var(--line); background: var(--glass);
+}
+.pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); display: inline-block; }
+.pill.warm i { background: var(--amber); box-shadow: 0 0 12px var(--amber); }
+.pill.indigo i { background: var(--indigo); box-shadow: 0 0 12px var(--indigo); }
+
+.glass {
+  border-radius: 22px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.028));
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.eyebrow { font: 600 15px var(--mono); letter-spacing: 3.2px; color: var(--cyan); text-transform: uppercase; }
+
+.shot {
+  border-radius: 14px; overflow: hidden; border: 1px solid rgba(190, 205, 255, .22);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .55), 0 0 0 6px rgba(255, 255, 255, .03);
+  background: #fff;
+}
+.shot img { display: block; }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 10px; height: 34px; padding: 0 16px 0 12px; border-radius: 999px;
+  font: 700 15px var(--mono); letter-spacing: 1.6px; text-transform: uppercase;
+}
+.tag.before { color: #ffb4a8; background: rgba(255, 110, 90, .12); border: 1px solid rgba(255, 130, 110, .35); }
+.tag.after  { color: #8ff3ea; background: rgba(33, 224, 208, .12); border: 1px solid rgba(33, 224, 208, .38); }
+.tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }

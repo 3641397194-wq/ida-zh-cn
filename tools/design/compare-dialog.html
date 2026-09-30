@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>ida-zh-cn compare: dialog</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  html, body { width: 1600px; height: 720px; }
+  .stage { width: 1600px; height: 720px; padding: 50px 60px; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 26px; }
+  h2 { font-size: 40px; font-weight: 800; letter-spacing: -.5px; }
+  .head p { font-size: 20px; color: var(--ink-dim); }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; justify-items: center; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .shot img { width: 640px; height: auto; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="head">
+    <h2><span class="gradient-text">对话框：标签页、单选框、按钮一并翻译</span></h2>
+    <p>Options → Colors…</p>
+  </div>
+  <div class="pair">
+    <div class="cell"><div class="tag before">Before</div><div class="shot"><img src="shots/off_colors.png" alt=""></div></div>
+    <div class="cell"><div class="tag after">After</div><div class="shot"><img src="shots/on_colors.png" alt=""></div></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+name: 补词条 / 译文建议
+description: 有些地方还是英文，或者译得不好
+labels: [translation]
+body:
+  - type: textarea
+    id: strings
+    attributes:
+      label: 英文原文 → 建议译文
+      description: 每行一条，例如 `Rename → 重命名`。可以直接粘贴 ida_zh_cn_missing.txt 的内容。
+    validations: { required: true }
+  - type: input
+    id: where
+    attributes:
+      label: 在哪个窗口 / 对话框看到的
+  - type: input
+    id: ida
+    attributes:
+      label: IDA 版本
