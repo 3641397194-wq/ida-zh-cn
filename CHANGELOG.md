@@ -2,6 +2,13 @@
 
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [SemVer](https://semver.org/lang/zh-CN/)。
 
+## [未发布]
+
+### 新增
+- `install.sh`：macOS / Linux 安装 / 卸载脚本，逻辑与 `install.ps1` 对齐（默认 `$IDAUSR/plugins` 或 `~/.idapro/plugins`，`--target`/`--uninstall`）。
+- CI 矩阵扩展到 `windows-latest` / `ubuntu-latest` / `macos-latest`，三个平台都跑安装器往返测试。
+- README（中/英）补充 macOS / Linux 安装步骤，兼容性表格标注插件本体在这两个平台上尚未用真实 IDA 验证。
+
 ## [1.0.0] — 2026-09-30
 
 首个公开版本。

@@ -34,7 +34,9 @@ Details and the crash you can cause if you get this wrong: [docs/how-it-works.md
 
 ## Install
 
-Windows, IDA Pro 9.x built on **Qt5 / PyQt5**, IDAPython working.
+Windows / macOS / Linux, IDA Pro 9.x built on **Qt5 / PyQt5**, IDAPython working.
+
+**Windows**
 
 ```powershell
 git clone https://github.com/3641397194-wq/ida-zh-cn.git
@@ -42,9 +44,18 @@ cd ida-zh-cn
 powershell -ExecutionPolicy Bypass -File .\install.ps1     # add -Uninstall to remove
 ```
 
-It copies `plugin\ida_zh_cn.py` and `plugin\zh_cn.json` into IDA's **user** plugin directory
-(`%IDAUSR%\plugins`, or `%APPDATA%\Hex-Rays\IDA Pro\plugins`). Then either restart IDA, or press **Alt+F7**
-(File → Script file…) and pick `ida_zh_cn.py` to switch on immediately.
+**macOS / Linux**
+
+```bash
+git clone https://github.com/3641397194-wq/ida-zh-cn.git
+cd ida-zh-cn
+chmod +x install.sh
+./install.sh          # add --uninstall to remove, --target <dir> for a custom path
+```
+
+Either script copies `plugin/ida_zh_cn.py` and `plugin/zh_cn.json` into IDA's **user** plugin directory
+(`$IDAUSR/plugins` if set, otherwise `%APPDATA%\Hex-Rays\IDA Pro\plugins` on Windows or `~/.idapro/plugins` on macOS/Linux).
+Then either restart IDA, or press **Alt+F7** (File → Script file…) and pick `ida_zh_cn.py` to switch on immediately.
 
 Toggle back to English any time: `Edit → Plugins → 中文界面 开/关`.
 
@@ -55,7 +66,7 @@ Toggle back to English any time: `Edit → Plugins → 中文界面 开/关`.
 | IDA Professional **9.1**, Windows 11, Qt 5.15.3, Python 3.12 | ✅ tested |
 | Other Qt5 / PyQt5 builds (e.g. 9.0) | ⚠️ untested, should work |
 | Qt6 / PySide6 builds | ❌ not supported yet (PRs welcome) |
-| macOS, Linux | ❌ untested |
+| macOS, Linux (installer `install.sh` provided, copy/uninstall paths covered by CI) | ⚠️ the plugin itself is unverified on a real IDA there — feedback welcome |
 
 Not translatable from a plugin: text the IDA kernel writes itself (Output-window messages, some status-bar text)
 and, of course, data (disassembly, hex view).

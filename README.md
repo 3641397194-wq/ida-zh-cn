@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-6e86ff?labelColor=0a1020)](LICENSE)
 [![IDA Pro](https://img.shields.io/badge/IDA%20Pro-9.1%20已测试-21e0d0?labelColor=0a1020)](#兼容性与测试)
 [![Qt](https://img.shields.io/badge/Qt5%20·%20PyQt5-ffc46b?labelColor=0a1020)](#兼容性与测试)
-[![Platform](https://img.shields.io/badge/Windows-x64-8ea2ff?labelColor=0a1020)](#兼容性与测试)
+[![Platform](https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-8ea2ff?labelColor=0a1020)](#兼容性与测试)
 
 **运行时汉化插件 · 不改 IDA 一个字节 · 一键开关 · 脚本与其他插件零破坏**
 
@@ -83,9 +83,11 @@
 
 ## 安装
 
-> 需要：Windows、IDA Pro 9.x（PyQt5 / Qt5 版本）、**IDAPython 已可用**（IDA 启动时 Output 窗口会打印 Python 版本）。
+> 需要：Windows / macOS / Linux、IDA Pro 9.x（PyQt5 / Qt5 版本）、**IDAPython 已可用**（IDA 启动时 Output 窗口会打印 Python 版本）。
 
 ### 方式一：脚本安装（推荐）
+
+**Windows**
 
 ```powershell
 git clone https://github.com/3641397194-wq/ida-zh-cn.git
@@ -93,13 +95,26 @@ cd ida-zh-cn
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-没装 git？到 [Releases](https://github.com/3641397194-wq/ida-zh-cn/releases/latest) 下载 zip，解压后在目录里运行同一条 `install.ps1` 命令即可。
+**macOS / Linux**
 
-脚本把 `plugin\` 下的两个文件复制到 IDA 的**用户**插件目录（设置了 `IDAUSR` 则用它，否则是 `%APPDATA%\Hex-Rays\IDA Pro\plugins`）。想装到别处：`-Target D:\path\plugins`；卸载：`-Uninstall`。
+```bash
+git clone https://github.com/3641397194-wq/ida-zh-cn.git
+cd ida-zh-cn
+bash install.sh
+```
+
+没装 git？到 [Releases](https://github.com/3641397194-wq/ida-zh-cn/releases/latest) 下载 zip，解压后在目录里运行同一条安装命令即可。
+
+脚本把 `plugin/` 下的两个文件复制到 IDA 的**用户**插件目录，不碰 IDA 安装目录：
+
+| 系统 | 默认目录（设置了 `IDAUSR` 则用 `$IDAUSR/plugins`） | 想装到别处 | 卸载 |
+|---|---|---|---|
+| Windows | `%APPDATA%\Hex-Rays\IDA Pro\plugins` | `-Target D:\path\plugins` | `-Uninstall` |
+| macOS / Linux | `~/.idapro/plugins` | `--target /path/plugins` | `--uninstall` |
 
 ### 方式二：手动复制
 
-把 [`plugin/ida_zh_cn.py`](plugin/ida_zh_cn.py) 和 [`plugin/zh_cn.json`](plugin/zh_cn.json) 放进 `%APPDATA%\Hex-Rays\IDA Pro\plugins\`（目录不存在就新建）。
+把 [`plugin/ida_zh_cn.py`](plugin/ida_zh_cn.py) 和 [`plugin/zh_cn.json`](plugin/zh_cn.json) 放进上表对应的用户插件目录（不存在就新建）。
 
 ### 让它生效
 
@@ -157,7 +172,7 @@ flowchart LR
 | IDA Professional **9.1** · Windows 11 · Qt 5.15.3 · Python 3.12 | ✅ 已测试 |
 | IDA 9.0 及其他 Qt5 / PyQt5 版本 | ⚠️ 未测试，理论上兼容，欢迎反馈 |
 | 改用 Qt6 / PySide6 的 IDA 版本 | ❌ 暂不支持（欢迎 PR） |
-| macOS · Linux | ❌ 未测试 |
+| macOS · Linux | ⚠️ 已提供 `install.sh`，安装 / 卸载流程在 CI 的 Ubuntu 与 macOS 上验证；**插件本体尚未在真实的 macOS / Linux IDA 上运行测试**，欢迎反馈 |
 
 在隔离的 IDA 实例里做过的验证：
 
@@ -188,13 +203,13 @@ flowchart LR
 <details>
 <summary><b>装了没反应 / Output 窗口里没有 <code>[ida_zh_cn]</code> 提示</b></summary>
 
-先确认 IDAPython 已加载：启动时 Output 窗口应当打印 `Python 3.x ...`。如果看到 `Python 3 is not configured (Python3TargetDLL value is not set)`，在 IDA 安装目录运行一次 `idapyswitch.exe --auto-apply`。然后重启 IDA，或用 `Alt+F7` 直接运行 `ida_zh_cn.py`。
+先确认 IDAPython 已加载：启动时 Output 窗口应当打印 `Python 3.x ...`。如果看到 `Python 3 is not configured (Python3TargetDLL value is not set)`，在 IDA 安装目录运行一次 `idapyswitch --auto-apply`（Windows 是 `idapyswitch.exe`）。然后重启 IDA，或用 `Alt+F7` 直接运行 `ida_zh_cn.py`。
 </details>
 
 <details>
 <summary><b>怎么恢复英文？</b></summary>
 
-`Edit → Plugins → 中文界面 开/关` 点一下即可，无需重启。彻底卸载：`install.ps1 -Uninstall`，或手动删掉 `ida_zh_cn.py` 与 `zh_cn.json`。
+`Edit → Plugins → 中文界面 开/关` 点一下即可，无需重启。彻底卸载：Windows 用 `install.ps1 -Uninstall`，macOS / Linux 用 `bash install.sh --uninstall`，或手动删掉 `ida_zh_cn.py` 与 `zh_cn.json`。
 </details>
 
 <details>

@@ -6,7 +6,11 @@ on:
 
 jobs:
   validate:
-    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
@@ -21,7 +25,8 @@ jobs:
       - name: Check the dictionary
         run: python tools/check_dict.py
 
-      - name: Installer round-trip
+      - name: Installer round-trip (Windows)
+        if: runner.os == 'Windows'
         shell: powershell
         run: |
           $t = Join-Path $env:RUNNER_TEMP 'plugins'
@@ -29,3 +34,17 @@ jobs:
           foreach ($f in 'ida_zh_cn.py','zh_cn.json') { if (-not (Test-Path (Join-Path $t $f))) { throw "install failed: $f" } }
           .\install.ps1 -Target $t -Uninstall
           if (Test-Path (Join-Path $t 'ida_zh_cn.py')) { throw 'uninstall failed' }
+
+      - name: Installer round-trip (macOS / Linux)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x install.sh
+          t="$RUNNER_TEMP/plugins"
+          ./install.sh --target "$t"
+          for f in ida_zh_cn.py zh_cn.json; do
+            [ -f "$t/$f" ] || { echo "install failed: $f"; exit 1; }
+          done
+          ./install.sh --target "$t" --uninstall
+          if [ -f "$t/ida_zh_cn.py" ]; then echo "uninstall failed"; exit 1; fi
