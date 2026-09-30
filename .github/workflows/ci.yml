@@ -1,0 +1,31 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # IDA's own modules (ida_kernwin, PyQt5 ...) do not exist on CI, so this only checks syntax.
+      - name: Byte-compile the plugin
+        run: python -m py_compile plugin/ida_zh_cn.py
+
+      - name: Check the dictionary
+        run: python tools/check_dict.py
+
+      - name: Installer round-trip
+        shell: powershell
+        run: |
+          $t = Join-Path $env:RUNNER_TEMP 'plugins'
+          .\install.ps1 -Target $t
+          foreach ($f in 'ida_zh_cn.py','zh_cn.json') { if (-not (Test-Path (Join-Path $t $f))) { throw "install failed: $f" } }
+          .\install.ps1 -Target $t -Uninstall
+          if (Test-Path (Join-Path $t 'ida_zh_cn.py')) { throw 'uninstall failed' }

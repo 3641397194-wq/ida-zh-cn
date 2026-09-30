@@ -4,6 +4,7 @@
 
 <br>
 
+[![CI](https://github.com/3641397194-wq/ida-zh-cn/actions/workflows/ci.yml/badge.svg)](https://github.com/3641397194-wq/ida-zh-cn/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-6e86ff?labelColor=0a1020)](LICENSE)
 [![IDA Pro](https://img.shields.io/badge/IDA%20Pro-9.1%20已测试-21e0d0?labelColor=0a1020)](#兼容性与测试)
 [![Qt](https://img.shields.io/badge/Qt5%20·%20PyQt5-ffc46b?labelColor=0a1020)](#兼容性与测试)

@@ -11,7 +11,7 @@
 - 1860 条词典 `zh_cn.json`（主体来自两个 MIT 社区词典，另新增 148 条，见 `NOTICE.md`）。
 - `Edit → Plugins → 中文界面 开/关`，状态持久化；`Alt+F7` 直接运行 `ida_zh_cn.py` 可免重启生效。
 - `zh_cn_user.json` 用户词典覆盖；`ida_zh_cn_missing.txt` 记录未命中的界面英文。
-- `install.ps1` 安装 / 卸载脚本，`tools/check_dict.py` 词典校验，`tools/design/` 设计图源文件与渲染脚本。
+- `install.ps1` 安装 / 卸载脚本，`tools/check_dict.py` 词典校验，`tools/design/` 设计图源文件与渲染脚本，GitHub Actions CI。
 
 ### 已验证
 - IDA Professional 9.1 · Windows 11 · Qt 5.15.3 · Python 3.12：窗口标识与菜单路径不受影响；8 轮开关压力测试无崩溃；重绘内存不增长；关闭后完整还原。
