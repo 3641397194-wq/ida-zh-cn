@@ -247,16 +247,16 @@ class ZhStyle(QtWidgets.QProxyStyle):
 # --------------------------------------------------------------------------- #
 # 文字替换: 标签 / 按钮 / 提示 / 对话框标题 (可还原)
 # --------------------------------------------------------------------------- #
-def _swap(obj, getter, setter, prop):
+def _swap(obj, getter, setter, prop, fn=translate):
     try:
         raw = getter()
     except Exception:  # noqa: BLE001
         return
     if not raw:
         return
-    z = translate(raw)
+    z = fn(raw)
     if z is None:
-        _note_missing(raw.strip())
+        _note_missing(raw.replace("&", "").split(chr(9))[0].strip())
         return
     if z != raw:
         try:
@@ -329,6 +329,10 @@ def _visit(w, st):
                 continue
             _swap(a, a.toolTip, a.setToolTip, P_TIP)
             _swap(a, a.statusTip, a.setStatusTip, P_STIP)
+            if sys.platform == "darwin" and isinstance(w, (QtWidgets.QMenu, QtWidgets.QMenuBar)):
+                _swap(a, a.text, a.setText, P_TEXT, translate_menu)
+        if sys.platform == "darwin" and isinstance(w, QtWidgets.QMenu):
+            _swap(w, w.title, w.setTitle, P_TITLE, translate_menu)
 
     # 对话框标题: 只改真正的对话框, 且不是 IDA 的停靠窗口
     if w.isWindow() and isinstance(w, QtWidgets.QDialog):
@@ -433,6 +437,9 @@ class _State:
                         for a in w.actions():
                             _restore(a, P_TIP, a.setToolTip)
                             _restore(a, P_STIP, a.setStatusTip)
+                            _restore(a, P_TEXT, a.setText)
+                        if isinstance(w, QtWidgets.QMenu):
+                            _restore(w, P_TITLE, w.setTitle)
                 except RuntimeError:
                     pass
         self.installed = False

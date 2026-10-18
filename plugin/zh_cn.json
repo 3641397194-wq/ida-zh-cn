@@ -1859,5 +1859,6 @@
 "Zoom in": "放大",
 "Zoom out": "缩小",
 "_credits": "Merged from MIT-licensed community dictionaries: 0x-focus/IDA-Pro-9.0-Chinese-Translation (zh_CN.json) and tuxi/ida-i18n (ida_i18n_zh_CN.json), plus additions for IDA 9.1. Keys are normalized English (no '&', no trailing '...'); values are Chinese without mnemonic or ellipsis - the plugin re-adds them.",
-"detect and parse golang metadata": "检测并解析 golang 元数据"
+"detect and parse golang metadata": "检测并解析 golang 元数据",
+"Enter Full Screen": "进入全屏"
 }
