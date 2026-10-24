@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-ida_zh_cn -- IDA Pro 9.x 简体中文界面 (运行时汉化插件, Qt5 / PyQt5)
+ida_zh_cn -- IDA Pro 9.x 简体中文界面 (运行时汉化插件, Qt5 / PyQt5 与 Qt6 / PySide6)
 
   版权所有 (c) 2026 3641397194-wq    许可证: MIT (词典的第三方来源见 NOTICE.md)
   项目主页: https://github.com/3641397194-wq/ida-zh-cn
@@ -15,6 +15,9 @@ ida_zh_cn -- IDA Pro 9.x 简体中文界面 (运行时汉化插件, Qt5 / PyQt5)
       - 菜单栏 / 菜单 / 标签页 / 表头: 在"绘制层"翻译 (QProxyStyle), 控件上的真实文字保持英文。
       - 标签、按钮、提示、对话框标题: 纯显示文字, 直接替换, 并记住原文以便还原。
       - 停靠窗口 / TWidget 的 windowTitle 从不修改。
+  * Qt6 / PySide6 (IDA 9.3+) 下 QStyleOption.SO_*、QStyle.CE_*、QEvent.Type 变成枚举对象,
+    而 option.type / drawControl 的 element 仍是 int, 且 OptionType 的 int() 会抛异常;
+    相关比较统一经 _ei() 归一化, 否则绘制层类型守卫恒真, 菜单文字会被原样放行。
   * 词典: zh_cn.json (英文 -> 中文, 精确匹配)。同目录放 zh_cn_user.json 可覆盖/补充。
   * 未命中的界面英文会记录到 ida_zh_cn_missing.txt (仅本地、已过滤), 方便补词。
 
@@ -192,20 +195,43 @@ def _note_missing(raw):
 # --------------------------------------------------------------------------- #
 _QS = QtWidgets.QStyle
 _QO = QtWidgets.QStyleOption
+
+
+# [PySide6 兼容补丁] Qt6/PySide6 下 CE_*/SO_* 都是枚举对象, 而 option.type 与
+# drawControl 的 element 参数是 int. 直接比较枚举与 int 恒不相等(或被 sip/shiboken
+# 判为不同类型), 会让下面的类型校验永远失败、菜单文字原样放行(即菜单栏不汉化)。
+# 统一用 int() 归一化后再比较。
+def _ei(v):
+    """把 PySide6 的各种枚举/整数统一成 int。
+
+    注意: PySide6 里 QStyle.ControlElement 支持 int(), 但 QStyleOption.OptionType
+    是纯 enum.Enum, int() 会抛异常, 必须回退到 .value 取数值, 否则下面 "枚举 vs int"
+    的比较永远不相等, 菜单文字会被原样放行。
+    """
+    if isinstance(v, int):
+        return v
+    for conv in (int, lambda x: int(x.value)):
+        try:
+            return conv(v)
+        except Exception:  # noqa: BLE001
+            continue
+    return v
+
+
 _PAINT_ELEMENTS = {
-    _QS.CE_MenuBarItem, _QS.CE_MenuItem, _QS.CE_HeaderLabel, _QS.CE_Header,
-    _QS.CE_TabBarTabLabel, _QS.CE_TabBarTab,
+    _ei(_QS.CE_MenuBarItem), _ei(_QS.CE_MenuItem), _ei(_QS.CE_HeaderLabel),
+    _ei(_QS.CE_Header), _ei(_QS.CE_TabBarTabLabel), _ei(_QS.CE_TabBarTab),
 }
 
 
 def _expected_option_type(option):
     """包装类型 -> 选项自带的类型码。"""
     if isinstance(option, QtWidgets.QStyleOptionMenuItem):
-        return _QO.SO_MenuItem
+        return _ei(_QO.SO_MenuItem)
     if isinstance(option, QtWidgets.QStyleOptionHeader):
-        return _QO.SO_Header
+        return _ei(_QO.SO_Header)
     if isinstance(option, QtWidgets.QStyleOptionTab):
-        return _QO.SO_Tab
+        return _ei(_QO.SO_Tab)
     return None
 
 
@@ -219,7 +245,7 @@ def _patched_option(option):
     """
     try:
         exp = _expected_option_type(option)
-        if exp is None or option.type != exp:
+        if exp is None or _ei(option.type) != exp:
             return option
         t = option.text
         if not t:
@@ -239,7 +265,7 @@ class ZhStyle(QtWidgets.QProxyStyle):
     # 只覆盖 drawControl。不要覆盖 sizeFromContents: 那条路径里读选项字段曾导致崩溃,
     # 而中文菜单项几乎都比英文窄, 不需要重算宽度。
     def drawControl(self, element, option, painter, widget=None):
-        if element in _PAINT_ELEMENTS:
+        if _ei(element) in _PAINT_ELEMENTS:
             option = _patched_option(option)
         super().drawControl(element, option, painter, widget)
 
@@ -347,7 +373,7 @@ class _Filter(QtCore.QObject):
 
     def eventFilter(self, obj, ev):
         try:
-            if ev.type() == QtCore.QEvent.Polish and obj.isWidgetType():
+            if _ei(ev.type()) == _ei(QtCore.QEvent.Polish) and obj.isWidgetType():
                 if obj.isWindow() or isinstance(obj, (QtWidgets.QMenu, QtWidgets.QMenuBar,
                                                       QtWidgets.QTabBar, QtWidgets.QHeaderView)):
                     self.st.visit_tree(obj)
